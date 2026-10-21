@@ -1,0 +1,6 @@
+{
+  "claudeMdExcludes": ["**/.claude/shared/everywhere.md"],
+  "permissions": {
+    "deny": ["mcp__search__delete_index"]
+  }
+}

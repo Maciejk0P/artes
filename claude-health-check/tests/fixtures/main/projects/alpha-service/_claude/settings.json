@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": ["Bash(npm run test:*)"],
+    "deny": ["Read(./.env)"]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [{ "type": "command", "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check.py" }]
+      }
+    ]
+  }
+}

@@ -1,0 +1,358 @@
+=== launch
+          ┌┐
+  ──────┐ │└┐ ┌──────  claude-health check                             0.0.0
+        └─┘ └─┘        Kontrola tvojho nastavenia Claude Code.
+
+  Číta     tvoje nastavenie Claude Code, žiadny zdrojový kód · nič neposiela
+
+  Tento program  1 jazyk · 2 rozsah · 3 sken · 4 správa          bez tokenov
+  Claude Code    5 zmeny, súbor po súbore · 6 súhrn         tvoj plán Claude
+
+  ► JAZYK ─ · Rozsah ─ · Sken ─ · Správa ║ · Zmeny ─ · Súhrn             1/6
+
+  ? Language / Jazyk
+    1  English
+    2  Slovensky
+  Napíš 1-2 a stlač Enter [1]:
+
+=== what it changes and never changes
+  ČO MENÍ                  až po tvojom áno na tú jednu zmenu, najprv záloha
+  · tvoje pamäťové súbory (CLAUDE.md, CLAUDE.local.md, súbory pravidiel;
+    používateľské aj projektové): presne tie riadky, ktoré ukáže karta,
+    odstráni, skráti alebo presunie
+  · tvoje vlastné skilly, príkazy a agentov: opraví hlavičku alebo skráti
+    súbor
+  · nové súbory: skill, príkaz, súbor pravidiel, skript hooku, alebo
+    CLAUDE.md tam, kde nie je
+  · nastavenia: pridá hook alebo pravidlo povolení, nič neodstráni
+  · bez pýtania: len vlastný priečinok ~/.claude/health-check/ (dáta behu,
+    zálohy, obe správy)
+
+  ČO NIKDY NEMENÍ
+  · zdrojový kód ani nič mimo tvojho nastavenia Claude Code
+  · nič, čo nemá tvoje potvrdenie: žiadne „vykonať všetko“ neexistuje
+  · položky nastavení a hooky, ktoré tam už sú
+  · súbor ako celok: žiadny nezmaže a žiadny neprepíše
+  · skilly tretích strán
+  · konfiguračné súbory MCP
+  · históriu sessions a automatickú pamäť
+  · git: nič nepridáva do indexu, necommituje a neodosiela
+
+=== scope
+  √ Jazyk ─ ► ROZSAH ─ · Sken ─ · Správa ║ · Zmeny ─ · Súhrn             2/6
+
+  √ Jazyk     Slovensky
+
+  ? Ktoré projekty skontrolovať spolu s tvojimi používateľskými súbormi?
+    Používateľské súbory (~/.claude) sa kontrolujú vždy.
+    1  Tento priečinok
+         /work/demo/projects/alpha-service
+    2  Len moje používateľské súbory
+         všetko v ~/.claude: pamäť, skilly, príkazy, hooky, nastavenia
+    3  Každý projekt pod mojím domovským priečinkom
+         hľadá len CLAUDE.md a priečinky .claude · môže trvať minútu
+    4  Priečinky, ktoré vymenujem
+         jeden projekt, alebo priečinok s projektmi
+  Napíš 1-4 a stlač Enter [1]:
+
+=== scope, home folder
+  √ Jazyk ─ ► ROZSAH ─ · Sken ─ · Správa ║ · Zmeny ─ · Súhrn             2/6
+
+  √ Jazyk     Slovensky
+
+  ? Ktoré projekty skontrolovať spolu s tvojimi používateľskými súbormi?
+    Používateľské súbory (~/.claude) sa kontrolujú vždy.
+    1  Tento priečinok
+         /work/demo/projects/alpha-service
+    2  Len moje používateľské súbory
+         všetko v ~/.claude: pamäť, skilly, príkazy, hooky, nastavenia
+    3  Každý projekt pod mojím domovským priečinkom
+         hľadá len CLAUDE.md a priečinky .claude · môže trvať minútu
+    4  Priečinky, ktoré vymenujem
+         jeden projekt, alebo priečinok s projektmi
+  Napíš 1-4 a stlač Enter [1]:
+
+    · Hľadanie prejde tvoj domovský priečinok, nie celý počítač.
+    · Hľadá len súbory CLAUDE.md a priečinky .claude a nič iné neotvára.
+    · Vynechá skryté, závislostné, cache a systémové priečinky a zastaví sa
+      po 20 000 priečinkoch alebo 6 úrovniach.
+    · Môže to trvať minútu.
+  ? Projekt mimo domovského priečinka? Napíš ho (prázdny riadok, ak žiadny
+    nie je)
+
+=== scope, nested
+  √ Jazyk ─ ► ROZSAH ─ · Sken ─ · Správa ║ · Zmeny ─ · Súhrn             2/6
+
+  √ Jazyk     Slovensky
+  √ Rozsah    používateľské súbory + projekty: 2 (alpha-service, beta-tool)
+
+  ? Vnútri tvojich projektov ležia repozitáre s vlastnými súbormi Claude
+    Code: 2. Zahrnúť ich?
+    Každý sa skontroluje ako samostatný projekt a nikdy sa nepočíta do
+    projektu okolo neho.
+    1  Vynechať
+         správa ich vymenuje a žiadny neprečíta
+    2  Zahrnúť
+         každý bude vlastnou skupinou v každom zozname
+  Napíš 1-2 a stlač Enter [1]:
+
+=== scan
+  √ Jazyk ─ √ Rozsah ─ ► SKEN ─ · Správa ║ · Zmeny ─ · Súhrn             3/6
+
+  √ Jazyk     Slovensky
+  √ Rozsah    používateľské súbory + projekty: 2 (alpha-service, beta-tool)
+  √ Vnorené   vynechané: 2
+
+  √ Používateľ  súbory v ~/.claude: 21
+  √ Projekty    nájdené: 2 · súbory: 9
+  √ Importy     prečítané: 7 · nenájdené: 1 · príliš hlboko: 1
+  √ Nastavenia  súbory: 4 · hooky: 4 · hodnoty zamaskované             41 ms
+  √ Kontroly    kontroly: 29 · nálezy: 18 · kandidáti: 15 · posúdiť: 1
+  √ Kontext     ≈ 7 104 tokenov pred prvým slovom, v projekte alpha-service
+  √ Správa 1    state-20261001-131730.html                             26 ms
+
+  ■ Sken sa zastavil na limite, takže výsledok je neúplný. Kde, hovoria
+    „Poznámky zo skenu“ v správe.
+  Hotovo za 0,14 s. Žiadne tokeny, žiadna zmena, nič nikam neodišlo.
+
+=== scan, inside Claude Code
+  √ Jazyk ─ √ Rozsah ─ ► SKEN ─ · Správa ║ · Zmeny ─ · Súhrn             3/6
+
+  √ Jazyk     Slovensky
+  √ Rozsah    používateľské súbory + projekty: 2 (alpha-service, beta-tool)
+
+  √ Používateľ  súbory v ~/.claude: 21
+  √ Projekty    nájdené: 2 · súbory: 9
+  √ Importy     prečítané: 7 · nenájdené: 1 · príliš hlboko: 1
+  √ Nastavenia  súbory: 4 · hooky: 4 · hodnoty zamaskované             41 ms
+  √ Kontroly    kontroly: 29 · nálezy: 18 · kandidáti: 15 · posúdiť: 1
+  √ Kontext     ≈ 7 104 tokenov pred prvým slovom, v projekte alpha-service
+  √ Správa 1    state-20261001-131730.html                             26 ms
+
+  Hotovo za 0,14 s. Žiadna zmena, nič nikam neodišlo.
+
+=== report, overview
+  √ Jazyk ─ √ Rozsah ─ √ Sken ─ ► SPRÁVA ║ · Zmeny ─ · Súhrn             4/6
+
+  [ Prehľad ]   Nálezy 18     Kontext     Skilly 9
+
+  súbory: 30 · projekty: 2
+  ▲ 1 vysoká   ■ 9 stredná   ● 8 nízka   ○ 1 posúdiť
+
+  PAMÄŤOVÉ SÚBORY                  riadky       pod 200 riadkov │ nad
+  ~/.claude/CLAUDE.md                 238   ████████████████████│▓▓▓▓   119%
+  alpha-service/CLAUDE.md              12   █░░░░░░░░░░░░░░░░░░░│         6%
+  beta-tool/CLAUDE.md                   6   █░░░░░░░░░░░░░░░░░░░│         3%
+  alpha-service/CLAUDE.local.md         3   █░░░░░░░░░░░░░░░░░░░│         2%
+  alpha-service/…/web/CLAUDE.md         3   █░░░░░░░░░░░░░░░░░░░│         2%
+
+  NAČÍTANÉ NA ZAČIATKU SESSION     riadky       pod 400 riadkov │ nad
+  v projekte alpha-service            459   ████████████████████│▓▓▓    115%
+  v projekte beta-tool                443   ████████████████████│▓▓     111%
+  len používateľské súbory            437   ████████████████████│▓▓     109%
+
+  200 riadkov na súbor je z dokumentácie. 400 pre súčet je predvolená
+  hodnota tohto nástroja.
+
+=== report, findings
+  √ Jazyk ─ √ Rozsah ─ √ Sken ─ ► SPRÁVA ║ · Zmeny ─ · Súhrn             4/6
+
+    Prehľad   [ Nálezy 18 ]   Kontext     Skilly 9
+
+  ▲ VYSOKÁ 1
+    nastavenia nie sú platný JSON       ~/.claude/settings.local.json
+  ■ STREDNÁ 9
+    priveľa na začiatku session         ~/.claude/CLAUDE.md
+    import, ktorý nikam nevedie         ~/.claude/CLAUDE.md:43
+    pamäťový súbor je pridlhý           ~/.claude/CLAUDE.md:47
+    hook ukazuje na chýbajúci súbor     ~/.claude/settings.json
+    pridlhá reťaz importov              ~/.claude/shared/chain-4.md:5
+    … ďalšie v správe: 4
+  ● NÍZKA 8
+    kópie skillu, ktoré sa líšia        alpha-service/…/SKILL.md
+    pokyn zopakovaný medzi súbormi      alpha-service/CLAUDE.md:8
+    rovnaký riadok v projektoch         alpha-service/CLAUDE.md:9
+    … ďalšie v správe: 5
+  ○ POSÚDIŤ 1                             nič na zmenu, rozhodnutie je tvoje
+    MCP server bez pravidla povolení    alpha-service: tracker, search
+
+  Kandidáti nájdení len podľa slov: 15. Claude ich prečíta v ďalšom kroku.
+
+=== report, context
+  √ Jazyk ─ √ Rozsah ─ √ Sken ─ ► SPRÁVA ║ · Zmeny ─ · Súhrn             4/6
+
+    Prehľad     Nálezy 18   [ Kontext ]   Skilly 9
+
+  DAŇ Z KONTEXTU  čo sa načíta pred tvojím prvým slovom
+  Tokeny sú odhad: bajty / 4. Je to predvolená hodnota tohto nástroja, nie
+  zdokumentované číslo.
+
+  v projekte alpha-service                                   ≈ 7 104 tokenov
+    ~/.claude/CLAUDE.md               3 594  █████████████               51%
+    ~/.claude/shared/reference.md     2 741  ██████████                  39%
+    popisy skillov (8)                  517  ██                           7%
+    alpha-service/CLAUDE.md              80  █                            1%
+    ďalšie časti: 10                    172  █                            2%
+
+    v poradí, v akom sa to načíta:
+    používateľ ─► projekt ─► importy ─► pravidlá ─► popisy
+    3 594         95         2 849      24          542
+
+  v projekte beta-tool                                       ≈ 6 994 tokenov
+  len používateľské súbory                                   ≈ 6 947 tokenov
+  Popisy agentov sa nepočítajú.
+
+=== report, skills
+  √ Jazyk ─ √ Rozsah ─ √ Sken ─ ► SPRÁVA ║ · Zmeny ─ · Súhrn             4/6
+
+    Prehľad     Nálezy 18     Kontext   [ Skilly 9 ]
+
+  SKILLY                riadky     pod 500 │    poznámky
+  Používateľské skilly · ~/.claude/skills (8)
+    long-skill             512   ██████████│▓   nad odporúčaním
+    no-description           7   █░░░░░░░░░│    bez popisu
+    shared-skill             6   █░░░░░░░░░│    ≠ kópia v alpha-service
+    unreachable-skill        8   █░░░░░░░░░│    nedá sa vyvolať
+    wordy-skill              6   █░░░░░░░░░│    popis 1 783 / 1 536
+    wrong-name               6   █░░░░░░░░░│    názov sa líši od priečinka
+    good-skill               8   █░░░░░░░░░│
+    vague-skill              6   █░░░░░░░░░│
+
+  /work/demo/projects/alpha-service (1)
+    shared-skill             6   █░░░░░░░░░│    ≠ kópia v ~/.claude/skills
+
+  Bez skillov: beta-tool
+  Cudzie skilly (označené „neupravovať“): 0
+
+=== how to continue
+  Správa 1 · stav tvojho nastavenia
+  file:///work/demo/home/.claude/health-check/state-20261001-131730.html
+
+  ── Ako pokračovať ────────────────────────────────────────────────────────
+  Tu sa končí. Nič sa nezmenilo.
+  Na zmeny treba Claude Code:
+
+    1  otvor terminál v priečinku tohto nástroja:
+         /work/demo/tool
+       a spusti v ňom Claude Code:
+         claude
+    2  v Claude Code napíš:
+         /claude-health resume 20261001-131730
+
+  Priečinok behu čaká v ~/.claude/health-check/run-20261001-131730.
+  Ak sa súbory dovtedy zmenia, sprievodca ich najprv naskenuje znova.
+
+=== how to continue, inside Claude Code
+  Správa 1 · stav tvojho nastavenia
+  file:///work/demo/home/.claude/health-check/state-20261001-131730.html
+
+  Spustené zvnútra Claude Code, takže nepadla žiadna otázka. Pokračuj
+  príkazom:
+         /claude-health resume 20261001-131730
+
+=== nothing to change
+  Správa 1 · stav tvojho nastavenia
+  file:///work/demo/home/.claude/health-check/state-20261001-131730.html
+
+  √ Nie je čo meniť. To je dobrý výsledok.
+
+=== another home folder
+  Správa 1 · stav tvojho nastavenia
+  file:///work/demo/home/.claude/health-check/state-20261001-131730.html
+
+  Tento beh kontroloval iný domovský priečinok (--home), takže sa končí
+  správou. Sprievodca v Claude Code pracuje s tvojím vlastným domovským
+  priečinkom.
+
+=== session: the changes, file by file
+  ZMENY, SÚBOR PO SÚBORE                              zmeny: 18 · súbory: 13
+  tvoj používateľský pamäťový súbor, ostatné používateľské súbory, projekty
+   1  ~/.claude/CLAUDE.md                                  4  ■3 ●1
+   2  ~/.claude/shared/chain-4.md                          1  ■1
+   3  ~/.claude/skills/long-skill/SKILL.md                 1  ■1
+   4  ~/.claude/skills/no-description/SKILL.md             1  ■1
+   5  ~/.claude/skills/unreachable-skill/SKILL.md          1  ■1
+   6  ~/.claude/skills/wordy-skill/SKILL.md                1  ■1
+   7  ~/.claude/skills/wrong-name/SKILL.md                 1  ●1
+   8  ~/.claude/commands/deploy.md                         1  ●1
+   9  ~/.claude/agents/helper.md                           1  ●1
+  10  ~/.claude/settings.json                              2  ■1 ●1
+  11  ~/.claude/settings.local.json                        1  ▲1
+  12  alpha-service/CLAUDE.md                              2  ●2
+  13  alpha-service/.claude/skills/shared-skill/SKILL.md   1  ●1
+
+=== session: the header of file 1
+  ── Súbor 1 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/CLAUDE.md                                                  pamäť
+  riadky: 238   ████████████████████│▓▓▓▓   119% z odporúčaných 200
+  zmeny (4): Presunúť do súboru pravidiel · Zmazať duplikát · Skrátiť ×2
+
+=== session: the header of file 2
+  ── Súbor 2 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/shared/chain-4.md                                    importovaný
+  riadky: 5
+  zmeny (1): Skrátiť
+
+=== session: the header of file 3
+  ── Súbor 3 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/long-skill/SKILL.md                                 skill
+  riadky: 512   ████████████████████│▓      102% z odporúčaných 500
+  zmeny (1): Skrátiť
+
+=== session: the header of file 4
+  ── Súbor 4 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/no-description/SKILL.md                             skill
+  riadky: 7   █░░░░░░░░░░░░░░░░░░░│         1% z odporúčaných 500
+  zmeny (1): Opraviť hlavičku
+
+=== session: the header of file 5
+  ── Súbor 5 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/unreachable-skill/SKILL.md                          skill
+  riadky: 8   █░░░░░░░░░░░░░░░░░░░│         2% z odporúčaných 500
+  zmeny (1): Opraviť hlavičku
+
+=== session: the header of file 6
+  ── Súbor 6 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/wordy-skill/SKILL.md                                skill
+  riadky: 6   █░░░░░░░░░░░░░░░░░░░│         1% z odporúčaných 500
+  zmeny (1): Opraviť hlavičku
+
+=== session: the header of file 7
+  ── Súbor 7 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/wrong-name/SKILL.md                                 skill
+  riadky: 6   █░░░░░░░░░░░░░░░░░░░│         1% z odporúčaných 500
+  zmeny (1): Opraviť hlavičku
+
+=== session: the header of file 8
+  ── Súbor 8 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/commands/deploy.md                                        príkaz
+  riadky: 3
+  zmeny (1): Opraviť hlavičku
+
+=== session: the header of file 9
+  ── Súbor 9 z 13 ──────────────────────────────────────────────────────────
+  ~/.claude/agents/helper.md                                           agent
+  riadky: 5
+  zmeny (1): Opraviť hlavičku
+
+=== session: the header of file 10
+  ── Súbor 10 z 13 ─────────────────────────────────────────────────────────
+  ~/.claude/settings.json                                         nastavenia
+  zmeny (2): Zmeniť nastavenia ×2
+
+=== session: the header of file 11
+  ── Súbor 11 z 13 ─────────────────────────────────────────────────────────
+  ~/.claude/settings.local.json                           lokálne nastavenia
+  zmeny (1): Zmeniť nastavenia
+
+=== session: the header of file 12
+  ── Súbor 12 z 13 ─────────────────────────────────────────────────────────
+  alpha-service/CLAUDE.md                                              pamäť
+  riadky: 12   █░░░░░░░░░░░░░░░░░░░│         6% z odporúčaných 200
+  zmeny (2): Zmazať duplikát · Presunúť do používateľského súboru
+
+=== session: the header of file 13
+  ── Súbor 13 z 13 ─────────────────────────────────────────────────────────
+  alpha-service/.claude/skills/shared-skill/SKILL.md                   skill
+  riadky: 6   █░░░░░░░░░░░░░░░░░░░│         1% z odporúčaných 500
+  zmeny (1): Zmazať duplikát

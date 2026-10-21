@@ -1,0 +1,6 @@
+# Fixtures and scripts are compared byte for byte in the tests; keep one line ending on every checkout.
+* text=auto eol=lf
+# The launcher for sh has no extension, so it is named: a carriage return in it breaks the script.
+/claude-health text eol=lf
+# cmd reads batch files with CRLF; labels can be missed in a file that has LF alone.
+*.cmd text eol=crlf

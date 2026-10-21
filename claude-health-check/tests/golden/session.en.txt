@@ -1,0 +1,108 @@
+=== picked up
+[text]
+  √ Language ─ √ Scope ─ √ Scan ─ √ Report ║ ► CHANGES ─ · Summary       5/6
+
+  Picked up run-STAMP · English
+  user files + 2 projects (alpha-service, beta-tool)
+  32 findings from the checks · no file changed since the scan
+  The reading is done. The changes go on where they stopped.
+
+=== the changes, file by file
+[text]
+  CHANGES, FILE BY FILE                                32 changes · 14 files
+  your user memory file, then your other user files, then each project
+   1  ~/.claude/CLAUDE.md                                 16  ■6 ●10
+   2  ~/.claude/shared/chain-4.md                          1  ■1
+   3  ~/.claude/skills/long-skill/SKILL.md                 1  ■1
+   4  ~/.claude/skills/no-description/SKILL.md             1  ■1
+   5  ~/.claude/skills/unreachable-skill/SKILL.md          1  ■1
+   6  ~/.claude/skills/vague-skill/SKILL.md                1  ●1
+   7  ~/.claude/skills/wordy-skill/SKILL.md                1  ■1
+   8  ~/.claude/skills/wrong-name/SKILL.md                 1  ●1
+   9  ~/.claude/commands/deploy.md                         1  ●1
+  10  ~/.claude/agents/helper.md                           1  ●1
+  11  ~/.claude/settings.json                              2  ■1 ●1
+  12  ~/.claude/settings.local.json                        1  ▲1
+  13  alpha-service/CLAUDE.md                              3  ■1 ●2
+  14  alpha-service/.claude/skills/shared-skill/SKILL.md   1  ●1
+
+=== the walk enters the first file
+[text]
+  ── File 1 of 14 ──────────────────────────────────────────────────────────
+  ~/.claude/CLAUDE.md                                                 memory
+  238 lines   ████████████████████│▓▓▓▓   119% of the recommended 200
+  16 changes: Move into a rule file · Shorten ×3 · Delete the duplicate ·
+  Review the exception ×4 · Turn into a hook · Move to the project file ×3 ·
+  Change settings · Turn into a command · Turn into a skill
+
+=== card: a permission rule
+[diff]
+  · 8/32 skipped · Line about one project
+  ■ File 1/14 · change 9/32  Force push in prose only                 medium
+  ~/.claude/CLAUDE.md:22
+  Found    This line forbids running "git push --force" in prose only.
+  Why      A rule in settings is enforced; a line in a memory file is a
+           request.
++++ ~/.claude/settings.json              adds, changes nothing that is there
+@@ permissions.deny @@
++"Bash(git push --force *)"
+--- ~/.claude/CLAUDE.md                                      238 → 237 lines
+@@ -22,1 @@ ## Tools
+-- Never run `git push --force` on a shared branch.
+  Note     The rule covers the command wherever it is typed; a condition in
+           the line is not part of it.
+  backup first: ~/.claude/health-check/backup-STAMP
+
+=== after "apply, keep the line"
+[text]
+  √ 9/32 applied · permissions.deny +1 · the line stays
+
+=== stopped
+[text]
+  · stopped at 10/32
+  Stopped. No more changes.
+  1 applied · 8 skipped · 0 resolved on the way · 23 not reached
+
+=== findings after the reading
+[text]
+    Overview   [ Findings 32 ]   Context     Skills 9
+
+  ▲ HIGH 1
+    settings file is not valid JSON     ~/.claude/settings.local.json
+  ■ MEDIUM 13
+    Tabs or spaces                      alpha-service/CLAUDE.md:7
+    too much loaded at session start    ~/.claude/CLAUDE.md
+    Tests before a commit               ~/.claude/CLAUDE.md:19
+    Force push in prose only            ~/.claude/CLAUDE.md:22
+    Release procedure                   ~/.claude/CLAUDE.md:29
+    … 8 more in the report
+  ● LOW 18
+    Rule with an exception ×4           ~/.claude/CLAUDE.md:13, 14, 15, 24
+    Line about one project ×3           ~/.claude/CLAUDE.md:19, 37, 38
+    … 11 more in the report
+  ○ TO REVIEW 1                           nothing to change, yours to decide
+    MCP server, no permission rule      alpha-service: tracker, search
+
+  Candidates found by words only: 15. Read so far: 15 (13 confirmed, 2
+  dismissed, 0 still to read).
+
+=== summary
+[text]
+  √ Language ─ √ Scope ─ √ Scan ─ √ Report ║ √ Changes ─ ► SUMMARY       6/6
+
+  BEFORE → AFTER
+  ~/.claude/CLAUDE.md      238 ██████████│▓▓    →      238 ██████████│▓▓
+  at session start         459 over 400         →      459 over 400
+  context tax          ≈ 7,104 tokens           →  ≈ 7,104 tokens
+  findings               ▲ 1  ■ 13  ● 18        →    ▲ 1  ■ 12  ● 18
+
+  1 applied · 8 skipped · 0 resolved on the way · 23 not reached
+
+  WHERE THINGS WENT
+  ~/.claude/CLAUDE.md:22 ─► ~/.claude/settings.json            settings rule
+
+  Undo      every changed file was copied first to
+            ~/.claude/health-check/backup-STAMP
+
+  Report 2 · after the changes
+  file://LINK

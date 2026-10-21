@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "tracker": {
+      "command": "npx",
+      "args": ["-y", "tracker-server", "--key", "FIXTURE-SECRET-VALUE-mcp-arg"],
+      "env": { "TRACKER_KEY": "FIXTURE-SECRET-VALUE-mcp-env" }
+    },
+    "search": { "command": "search-server" }
+  }
+}

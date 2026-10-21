@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "notes": { "command": "notes-server" },
+    "search": { "command": "search-server" },
+    "tracker": { "command": "tracker-server" }
+  }
+}

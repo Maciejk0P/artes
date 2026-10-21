@@ -1,0 +1,131 @@
+{
+  "note": "Answers checked against the documentation on the date in FACTS.checkedOn, as written down. Q9 and Q10 (plugins) are left out: the package has none.",
+  "answers": [
+    {
+      "id": "Q1",
+      "answer": "The documented hook event names are: SessionStart, Setup, UserPromptSubmit, UserPromptExpansion, PreToolUse, PermissionRequest, PermissionDenied, PostToolUse, PostToolUseFailure, PostToolBatch, Notification, MessageDisplay, SubagentStart, SubagentStop, TaskCreated, TaskCompleted, Stop, StopFailure, TeammateIdle, InstructionsLoaded, ConfigChange, CwdChanged, DirectoryAdded, FileChanged, WorktreeCreate, WorktreeRemove, PreCompact, PostCompact, PreModelSwitch, PostModelSwitch, Elicitation, ElicitationResult, SessionEnd.",
+      "url": "https://code.claude.com/docs/en/hooks-guide.md",
+      "confidence": "documented",
+      "quote": "| Event | When it fires | ... | `SessionStart` | When a session begins or resumes | ... | `Setup` | When you start Claude Code with `--init-only`, or with `--init` or `--maintenance` in `-p` mode. For one-time preparation in CI or scripts | ... | `UserPromptSubmit` | When you submit a prompt, before Claude processes it | ... [continuing through all documented events]"
+    },
+    {
+      "id": "Q2",
+      "answer": "The exact JSON shape for hook entries is: `{event: [{matcher: string, hooks: [{type: 'command'|'http'|'mcp_tool'|'prompt'|'agent', command?: string, if?: string, timeout?: number, statusMessage?: string, ...}]}]}`. The five hook types are: command (shell), http (POST), mcp_tool (MCP server tool), prompt (LLM evaluation), agent (subagent). PreToolUse blocks actions by exiting with code 2 or returning JSON with `permissionDecision: 'deny'` and `permissionDecisionReason`.",
+      "url": "https://code.claude.com/docs/en/hooks-guide.md",
+      "confidence": "documented",
+      "quote": "Each hook has a `type` that determines how it runs. Most hooks use `\"type\": \"command\"`, which runs a shell command. Four other types are available: `\"type\": \"http\"`: POST event data to a URL. `\"type\": \"mcp_tool\"`: call a tool on a configured MCP server. `\"type\": \"prompt\"`: single-turn LLM evaluation. `\"type\": \"agent\"`: multi-turn verification with tool access... For `PreToolUse` permission decisions, the most restrictive answer applies, in the order `deny`, `defer`, `ask`, `allow`."
+    },
+    {
+      "id": "Q3",
+      "answer": "Permission rule syntax is: `Tool(specifier)` or bare `Tool`. Examples: Bash(npm run *), Bash(git commit *), Bash(rm *); Read(./.env), Read(~/secrets/**), Edit(/src/**); mcp__puppeteer (whole server), mcp__puppeteer__* (wildcard), mcp__puppeteer__puppeteer_navigate (single tool). Rules are evaluated in order: deny takes precedence, then ask, then allow.",
+      "url": "https://code.claude.com/docs/en/permissions.md",
+      "confidence": "documented",
+      "quote": "Permission rules follow the format `Tool` or `Tool(specifier)`. Bash rules match the whole command text, with `*` standing in for any text... To block Claude's file tools from reading a file or directory, add a `Read` deny rule for its path, such as `Read(./.env)` or `Read(./secrets/**)`. MCP rules use the server name as configured in Claude Code, optionally followed by the name of a tool from that server. `mcp__puppeteer` matches any tool provided by the `puppeteer` server; `mcp__puppeteer__puppeteer_navigate` matches the `puppeteer_navigate` tool."
+    },
+    {
+      "id": "Q4",
+      "answer": "Rules without `paths` frontmatter are loaded at session start with the same priority as `.claude/CLAUDE.md`. Rules WITH `paths` frontmatter only load when Claude reads files matching the specified glob patterns, triggering lazy loading.",
+      "url": "https://code.claude.com/docs/en/memory.md",
+      "confidence": "documented",
+      "quote": "Rules without a `paths` field are loaded unconditionally and apply to all files. Path-scoped rules trigger when Claude reads files matching the pattern, not on every tool use."
+    },
+    {
+      "id": "Q5",
+      "answer": "Maximum depth for @path imports in memory files is four hops. Imports inside code spans and code blocks are ignored (parsing skips Markdown code spans and fenced code blocks).",
+      "url": "https://code.claude.com/docs/en/memory.md",
+      "confidence": "documented",
+      "quote": "Imported files can recursively import other files, with a maximum depth of four hops. Import parsing skips Markdown code spans and fenced code blocks. To mention a path in your CLAUDE.md without importing it, wrap it in backticks."
+    },
+    {
+      "id": "Q6",
+      "answer": "Size guidance: CLAUDE.md target is under 200 lines per file; files over 4 MiB are skipped entirely. Skill description cap (combined description + when_to_use) is 1,536 characters. Memory file: first 200 lines or 25KB are loaded at session start; content beyond that threshold is not loaded.",
+      "url": "https://code.claude.com/docs/en/memory.md",
+      "confidence": "documented",
+      "quote": "Size: target under 200 lines per CLAUDE.md file. Longer files consume more context and reduce adherence... Claude Code loads a CLAUDE.md file of up to 4 MiB in full and skips a larger file... The first 200 lines of `MEMORY.md`, or the first 25KB, whichever comes first, are loaded at the start of every conversation. Content beyond that threshold is not loaded at session start."
+    },
+    {
+      "id": "Q7",
+      "answer": "Skill listing budget is calculated at 1% of the model's context window. Individual descriptions are capped at 1,536 characters (combined description + when_to_use). When context is tight, Claude Code truncates descriptions starting with skills used least frequently. Configure with `skillListingBudgetFraction` and `skillListingMaxDescChars` settings.",
+      "url": "https://code.claude.com/docs/en/skills.md",
+      "confidence": "documented",
+      "quote": "Budget scale: 1% of the model's context window... Character cap per description: 1,536 characters (combined `description` + `when_to_use`)... Adjust the budget with settings: `skillListingBudgetFraction`, `skillListingMaxDescChars`"
+    },
+    {
+      "id": "Q8",
+      "answer": "Skills at `.claude/skills/<name>/SKILL.md` are discovered and available immediately as `/<name>` in the current project. Nested skills in subdirectories (like `packages/shared/.claude/skills/<name>/SKILL.md`) are loaded automatically when Claude works on files in that subdirectory, and qualified variants are available (e.g., `/packages/shared:build` for nested skills that share a name with root skills).",
+      "url": "https://code.claude.com/docs/en/skills.md",
+      "confidence": "documented",
+      "quote": "Claude Code loads project skills from `.claude/skills/` in the directory where you start it and in **every parent directory up to the repository root**... **Nested skills load automatically when Claude works on files in that subdirectory**, but don't appear in the `/` menu until then."
+    },
+    {
+      "id": "Q11",
+      "answer": "The `AskUserQuestion` tool is available in the terminal CLI, IDE extensions, and desktop app. Permission required: No. In allowed-tools, it is named `AskUserQuestion` (bare tool name, no specifier). Documented limits: questions stay open until answered; optional timeout via `askUserQuestionTimeout` setting (60s, 5m, or 10m).",
+      "url": "https://code.claude.com/docs/en/tools-reference.md",
+      "confidence": "documented",
+      "quote": "`AskUserQuestion` | Asks multiple-choice questions to gather requirements or clarify ambiguity. Questions stay open until you answer them by default. See [AskUserQuestion tool behavior] | No"
+    },
+    {
+      "id": "Q12",
+      "answer": "Documented SKILL.md frontmatter fields: name, description, when_to_use, argument-hint, arguments, disable-model-invocation, user-invocable, allowed-tools, disallowed-tools, model, effort, context, agent, background, hooks, paths, shell, metadata, license, compatibility.",
+      "url": "https://code.claude.com/docs/en/skills.md",
+      "confidence": "documented",
+      "quote": "The frontmatter at the top of `SKILL.md` uses YAML between `---` markers. Here are all documented fields: | Field | Required | Description | ... | `name` | ... | `description` | ... | `when_to_use` | ... | `allowed-tools` | ... [complete table of all fields]"
+    },
+    {
+      "id": "Q13",
+      "answer": "File locations: project-scoped MCP servers in `.mcp.json` at project root; user-scoped in `~/.claude.json`. Yes, project-scoped servers from `.mcp.json` require approval before first use in interactive sessions. In non-interactive mode (`-p`), Agent SDK, cloud sessions, and bypass mode, approval is skipped and servers load automatically.",
+      "url": "https://code.claude.com/docs/en/mcp.md",
+      "confidence": "documented",
+      "quote": "Project-scoped | `.mcp.json` file in project root | Yes, via version control... User-scoped | `~/.claude.json` | No, private to your user... **Yes, project-scoped servers require approval before first use** in interactive sessions... For security reasons, Claude Code prompts for approval in interactive sessions before using project-scoped servers from `.mcp.json` files."
+    },
+    {
+      "id": "Q14",
+      "answer": "Guidance: CLAUDE.md holds facts Claude should know in every session (coding standards, commands, conventions). If an entry is a multi-step procedure or only matters for part of the codebase, move it to a skill or path-scoped rule. Procedures belong in skills; enforcement (hard rules that must run) belongs in hooks/permissions. Hooks and permissions enforce regardless of what Claude decides.",
+      "url": "https://code.claude.com/docs/en/memory.md",
+      "confidence": "documented",
+      "quote": "When to add to CLAUDE.md: Treat CLAUDE.md as the place you write down what you'd otherwise re-explain... Keep it to facts Claude should hold in every session: build commands, conventions, project layout, 'always do X' rules. If an entry is a multi-step procedure or only matters for one part of the codebase, move it to a [skill] or a [path-scoped rule] instead."
+    },
+    {
+      "id": "Q15",
+      "answer": "Settings precedence (highest to lowest): Managed settings, Command line (`--settings`), Project local (`.claude/settings.local.json`), Shared project (`.claude/settings.json`), User (`~/.claude/settings.json`). A key set at a higher level overrides the same key set lower down. Array values such as permission rules merge across layers: entries from all layers combine, with higher levels taking precedence on duplicates.",
+      "url": "https://code.claude.com/docs/en/settings.md",
+      "confidence": "documented",
+      "quote": "The precedence order... Managed settings → Command line → Project local → Shared project → User. A key set at a higher level overrides the same key set lower down."
+    }
+  ],
+  "hookEvents": [
+    "SessionStart",
+    "Setup",
+    "UserPromptSubmit",
+    "UserPromptExpansion",
+    "PreToolUse",
+    "PermissionRequest",
+    "PermissionDenied",
+    "PostToolUse",
+    "PostToolUseFailure",
+    "PostToolBatch",
+    "Notification",
+    "MessageDisplay",
+    "SubagentStart",
+    "SubagentStop",
+    "TaskCreated",
+    "TaskCompleted",
+    "Stop",
+    "StopFailure",
+    "TeammateIdle",
+    "InstructionsLoaded",
+    "ConfigChange",
+    "CwdChanged",
+    "DirectoryAdded",
+    "FileChanged",
+    "WorktreeCreate",
+    "WorktreeRemove",
+    "PreCompact",
+    "PostCompact",
+    "PreModelSwitch",
+    "PostModelSwitch",
+    "Elicitation",
+    "ElicitationResult",
+    "SessionEnd"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "claude-health-check",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A health check for a Claude Code setup: a launcher for the terminal and a project skill in .claude/skills/claude-health that report what they found and apply only the changes the user confirms.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/",
+    "check": "node bin/claude-health.mjs check"
+  }
+}

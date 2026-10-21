@@ -1,0 +1,109 @@
+=== picked up
+[text]
+  √ Jazyk ─ √ Rozsah ─ √ Sken ─ √ Správa ║ ► ZMENY ─ · Súhrn             5/6
+
+  Prevzatý beh run-STAMP · Slovensky
+  používateľské súbory + projekty: 2 (alpha-service, beta-tool)
+  nálezy z kontrol: 32 · od skenu sa nezmenil žiadny súbor
+  Čítanie je hotové. Zmeny pokračujú tam, kde skončili.
+
+=== the changes, file by file
+[text]
+  ZMENY, SÚBOR PO SÚBORE                              zmeny: 32 · súbory: 14
+  tvoj používateľský pamäťový súbor, ostatné používateľské súbory, projekty
+   1  ~/.claude/CLAUDE.md                                 16  ■6 ●10
+   2  ~/.claude/shared/chain-4.md                          1  ■1
+   3  ~/.claude/skills/long-skill/SKILL.md                 1  ■1
+   4  ~/.claude/skills/no-description/SKILL.md             1  ■1
+   5  ~/.claude/skills/unreachable-skill/SKILL.md          1  ■1
+   6  ~/.claude/skills/vague-skill/SKILL.md                1  ●1
+   7  ~/.claude/skills/wordy-skill/SKILL.md                1  ■1
+   8  ~/.claude/skills/wrong-name/SKILL.md                 1  ●1
+   9  ~/.claude/commands/deploy.md                         1  ●1
+  10  ~/.claude/agents/helper.md                           1  ●1
+  11  ~/.claude/settings.json                              2  ■1 ●1
+  12  ~/.claude/settings.local.json                        1  ▲1
+  13  alpha-service/CLAUDE.md                              3  ■1 ●2
+  14  alpha-service/.claude/skills/shared-skill/SKILL.md   1  ●1
+
+=== the walk enters the first file
+[text]
+  ── Súbor 1 z 14 ──────────────────────────────────────────────────────────
+  ~/.claude/CLAUDE.md                                                  pamäť
+  riadky: 238   ████████████████████│▓▓▓▓   119% z odporúčaných 200
+  zmeny (16): Presunúť do súboru pravidiel · Skrátiť ×3 · Zmazať duplikát ·
+  Preveriť výnimku ×4 · Spraviť z toho hook ·
+  Presunúť do súboru projektu ×3 · Zmeniť nastavenia ·
+  Spraviť z toho príkaz · Spraviť z toho skill
+
+=== card: a permission rule
+[diff]
+  · 8/32 preskočené · Line about one project
+  ■ Súbor 1/14 · zmena 9/32  Force push in prose only                stredná
+  ~/.claude/CLAUDE.md:22
+  Nález    This line forbids running "git push --force" in prose only.
+  Prečo    A rule in settings is enforced; a line in a memory file is a
+           request.
++++ ~/.claude/settings.json                   pridáva, nič existujúce nemení
+@@ permissions.deny @@
++"Bash(git push --force *)"
+--- ~/.claude/CLAUDE.md                                    riadky: 238 → 237
+@@ -22,1 @@ ## Tools
+-- Never run `git push --force` on a shared branch.
+  Pozor    Pravidlo platí pre príkaz všade, kde sa napíše; podmienka z
+           riadka jeho súčasťou nie je.
+  najprv záloha: ~/.claude/health-check/backup-STAMP
+
+=== after "apply, keep the line"
+[text]
+  √ 9/32 vykonané · permissions.deny +1 · riadok ostáva
+
+=== stopped
+[text]
+  · zastavené na 10/32
+  Zastavené. Žiadne ďalšie zmeny.
+  vykonané: 1 · preskočené: 8 · vyriešené cestou: 0 · neprejdené: 23
+
+=== findings after the reading
+[text]
+    Prehľad   [ Nálezy 32 ]   Kontext     Skilly 9
+
+  ▲ VYSOKÁ 1
+    nastavenia nie sú platný JSON       ~/.claude/settings.local.json
+  ■ STREDNÁ 13
+    Tabs or spaces                      alpha-service/CLAUDE.md:7
+    priveľa na začiatku session         ~/.claude/CLAUDE.md
+    Tests before a commit               ~/.claude/CLAUDE.md:19
+    Force push in prose only            ~/.claude/CLAUDE.md:22
+    Release procedure                   ~/.claude/CLAUDE.md:29
+    … ďalšie v správe: 8
+  ● NÍZKA 18
+    Rule with an exception ×4           ~/.claude/CLAUDE.md:13, 14, 15, 24
+    Line about one project ×3           ~/.claude/CLAUDE.md:19, 37, 38
+    … ďalšie v správe: 11
+  ○ POSÚDIŤ 1                             nič na zmenu, rozhodnutie je tvoje
+    MCP server bez pravidla povolení    alpha-service: tracker, search
+
+  Kandidáti nájdení len podľa slov: 15. Zatiaľ prečítané: 15 (potvrdené: 13,
+  zamietnuté: 2, ostáva prečítať: 0).
+
+=== summary
+[text]
+  √ Jazyk ─ √ Rozsah ─ √ Sken ─ √ Správa ║ √ Zmeny ─ ► SÚHRN             6/6
+
+  PRED → PO
+  ~/.claude/CLAUDE.md      238 ██████████│▓▓    →      238 ██████████│▓▓
+  na začiatku session      459 nad 400          →      459 nad 400
+  daň z kontextu       ≈ 7 104 tokenov          →  ≈ 7 104 tokenov
+  nálezy                 ▲ 1  ■ 13  ● 18        →    ▲ 1  ■ 12  ● 18
+
+  vykonané: 1 · preskočené: 8 · vyriešené cestou: 0 · neprejdené: 23
+
+  KAM SA ČO PRESUNULO
+  ~/.claude/CLAUDE.md:22 ─► ~/.claude/settings.json  pravidlo v nastaveniach
+
+  Vrátenie  každý zmenený súbor bol najprv skopírovaný do
+            ~/.claude/health-check/backup-STAMP
+
+  Správa 2 · po zmenách
+  file://LINK

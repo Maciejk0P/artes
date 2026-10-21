@@ -1,0 +1,24 @@
+#!/bin/sh
+# claude-health: a health check of your Claude Code setup.
+#
+#   ./claude-health check            (./claude-health --help lists the options)
+#
+# This script and claude-health.cmd are the only places in this package that start a program,
+# and they start one: node, with the check. No browser is opened and Claude Code is not started.
+# The check ends with the link to its report and the two lines that continue in Claude Code.
+
+# Under Git Bash the folder is asked for in the spelling Windows uses (pwd -W). The other spelling
+# is rewritten for a Windows program only when the path holds no apostrophe, semicolon or backtick,
+# and Node would be handed a path that is not there.
+here=$(CDPATH= cd -- "$(dirname -- "$0")" && { pwd -W 2>/dev/null || pwd; }) || exit 1
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "claude-health needs Node.js 20 or newer on the PATH. / claude-health potrebuje Node.js 20 alebo novší v PATH." >&2
+  exit 1
+fi
+
+# Git Bash may give Node pipes where this script still sees a terminal; the check is told.
+tty=0
+if [ -t 0 ] && [ -t 1 ]; then tty=1; fi
+
+CLAUDE_HEALTH_TTY="${CLAUDE_HEALTH_TTY:-$tty}" exec node "$here/bin/claude-health.mjs" "$@"

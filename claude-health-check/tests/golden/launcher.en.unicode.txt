@@ -1,0 +1,356 @@
+=== launch
+          ┌┐
+  ──────┐ │└┐ ┌──────  claude-health check                             0.0.0
+        └─┘ └─┘        A health check of your Claude Code setup.
+
+  Reads    your Claude Code setup, no source code · sends nothing anywhere
+
+  This program   1 language · 2 scope · 3 scan · 4 report          no tokens
+  Claude Code    5 changes, file by file · 6 summary        your Claude plan
+
+  ► LANGUAGE ─ · Scope ─ · Scan ─ · Report ║ · Changes ─ · Summary       1/6
+
+  ? Language / Jazyk
+    1  English
+    2  Slovensky
+  Type 1-2 and press Enter [1]:
+
+=== what it changes and never changes
+  WHAT IT CHANGES       only after your yes to that one change, backup first
+  · your memory files (CLAUDE.md, CLAUDE.local.md, rule files; user and
+    project): the exact lines shown on the card are removed, shortened or
+    moved
+  · your own skills, commands and agents: front matter fixed, or the file
+    shortened
+  · new files: a skill, a command, a rule file, a hook script, or a
+    CLAUDE.md where there is none
+  · settings: a hook or a permission rule is added, nothing is removed
+  · without asking: only its own folder, ~/.claude/health-check/ (run data,
+    backups, the two reports)
+
+  WHAT IT NEVER CHANGES
+  · source code, or anything outside your Claude Code setup
+  · anything you did not confirm: there is no "apply all"
+  · settings entries and hooks that are already there
+  · a file as a whole: none is deleted, none is overwritten
+  · third-party skills
+  · the MCP configuration files
+  · session history and auto memory
+  · git: it does not stage, commit or upload
+
+=== scope
+  √ Language ─ ► SCOPE ─ · Scan ─ · Report ║ · Changes ─ · Summary       2/6
+
+  √ Language  English
+
+  ? Which projects should be checked along with your user files?
+    Your user files (~/.claude) are always checked.
+    1  This folder
+         /work/demo/projects/alpha-service
+    2  Only my user files
+         everything in ~/.claude: memory, skills, commands, hooks, settings
+    3  Every project under my home folder
+         looks only for CLAUDE.md and .claude folders · may take a minute
+    4  Folders I name
+         one project, or a folder that holds projects
+  Type 1-4 and press Enter [1]:
+
+=== scope, home folder
+  √ Language ─ ► SCOPE ─ · Scan ─ · Report ║ · Changes ─ · Summary       2/6
+
+  √ Language  English
+
+  ? Which projects should be checked along with your user files?
+    Your user files (~/.claude) are always checked.
+    1  This folder
+         /work/demo/projects/alpha-service
+    2  Only my user files
+         everything in ~/.claude: memory, skills, commands, hooks, settings
+    3  Every project under my home folder
+         looks only for CLAUDE.md and .claude folders · may take a minute
+    4  Folders I name
+         one project, or a folder that holds projects
+  Type 1-4 and press Enter [1]:
+
+    · The search covers your home folder, not the whole machine.
+    · It looks only for CLAUDE.md files and .claude folders and opens
+      nothing else.
+    · It skips hidden, dependency, cache and system folders, and stops at
+      20,000 folders or 6 levels.
+    · It may take a minute.
+  ? A project outside your home folder? Name it (an empty line when there is
+    none)
+
+=== scope, nested
+  √ Language ─ ► SCOPE ─ · Scan ─ · Report ║ · Changes ─ · Summary       2/6
+
+  √ Language  English
+  √ Scope     user files + 2 projects (alpha-service, beta-tool)
+
+  ? Repositories with their own Claude Code files sit inside your projects:
+    2. Include them?
+    Each one is checked as a project of its own, never counted into the
+    project around it.
+    1  Leave them out
+         the report names them and reads none
+    2  Include them
+         each becomes its own group in every list
+  Type 1-2 and press Enter [1]:
+
+=== scan
+  √ Language ─ √ Scope ─ ► SCAN ─ · Report ║ · Changes ─ · Summary       3/6
+
+  √ Language  English
+  √ Scope     user files + 2 projects (alpha-service, beta-tool)
+  √ Nested    left out: 2
+
+  √ User files   21 files in ~/.claude
+  √ Projects     2 found · 9 files
+  √ Imports      7 followed · 1 not found · 1 too deep
+  √ Settings     4 files · 4 hooks · values masked, never printed      41 ms
+  √ Checks       29 checks · 18 findings · 15 candidates · 1 to review
+  √ Context tax  ≈ 7,104 tokens before your first word (in alpha-service)
+  √ Report 1     state-20261001-131730.html                            26 ms
+
+  ■ The scan stopped at a limit, so the result is incomplete. "Scan notes"
+    in the report says where.
+  Done in 0.14 s. No tokens used, nothing changed, nothing sent anywhere.
+
+=== scan, inside Claude Code
+  √ Language ─ √ Scope ─ ► SCAN ─ · Report ║ · Changes ─ · Summary       3/6
+
+  √ Language  English
+  √ Scope     user files + 2 projects (alpha-service, beta-tool)
+
+  √ User files   21 files in ~/.claude
+  √ Projects     2 found · 9 files
+  √ Imports      7 followed · 1 not found · 1 too deep
+  √ Settings     4 files · 4 hooks · values masked, never printed      41 ms
+  √ Checks       29 checks · 18 findings · 15 candidates · 1 to review
+  √ Context tax  ≈ 7,104 tokens before your first word (in alpha-service)
+  √ Report 1     state-20261001-131730.html                            26 ms
+
+  Done in 0.14 s. Nothing changed, nothing sent anywhere.
+
+=== report, overview
+  √ Language ─ √ Scope ─ √ Scan ─ ► REPORT ║ · Changes ─ · Summary       4/6
+
+  [ Overview ]   Findings 18     Context     Skills 9
+
+  30 files · 2 projects      ▲ 1 high   ■ 9 medium   ● 8 low   ○ 1 to review
+
+  MEMORY FILES                      lines       under 200 lines │ over
+  ~/.claude/CLAUDE.md                 238   ████████████████████│▓▓▓▓   119%
+  alpha-service/CLAUDE.md              12   █░░░░░░░░░░░░░░░░░░░│         6%
+  beta-tool/CLAUDE.md                   6   █░░░░░░░░░░░░░░░░░░░│         3%
+  alpha-service/CLAUDE.local.md         3   █░░░░░░░░░░░░░░░░░░░│         2%
+  alpha-service/…/web/CLAUDE.md         3   █░░░░░░░░░░░░░░░░░░░│         2%
+
+  LOADED AT EVERY SESSION START     lines       under 400 lines │ over
+  in alpha-service                    459   ████████████████████│▓▓▓    115%
+  in beta-tool                        443   ████████████████████│▓▓     111%
+  user files only                     437   ████████████████████│▓▓     109%
+
+  200 lines per file is documented. 400 for the total is a default of this
+  tool.
+
+=== report, findings
+  √ Language ─ √ Scope ─ √ Scan ─ ► REPORT ║ · Changes ─ · Summary       4/6
+
+    Overview   [ Findings 18 ]   Context     Skills 9
+
+  ▲ HIGH 1
+    settings file is not valid JSON     ~/.claude/settings.local.json
+  ■ MEDIUM 9
+    too much loaded at session start    ~/.claude/CLAUDE.md
+    import that does not resolve        ~/.claude/CLAUDE.md:43
+    memory file too long                ~/.claude/CLAUDE.md:47
+    hook points at a missing file       ~/.claude/settings.json
+    import chain too deep               ~/.claude/shared/chain-4.md:5
+    … 4 more in the report
+  ● LOW 8
+    copies of a skill that differ       alpha-service/…/SKILL.md
+    instruction repeated across files   alpha-service/CLAUDE.md:8
+    same line in several projects       alpha-service/CLAUDE.md:9
+    … 5 more in the report
+  ○ TO REVIEW 1                           nothing to change, yours to decide
+    MCP server, no permission rule      alpha-service: tracker, search
+
+  Candidates found by words only: 15. Claude reads them next.
+
+=== report, context
+  √ Language ─ √ Scope ─ √ Scan ─ ► REPORT ║ · Changes ─ · Summary       4/6
+
+    Overview     Findings 18   [ Context ]   Skills 9
+
+  CONTEXT TAX  what is loaded before your first word
+  Tokens are estimated as bytes / 4: a default of this tool, not a
+  documented number.
+
+  in alpha-service                                            ≈ 7,104 tokens
+    ~/.claude/CLAUDE.md               3,594  █████████████               51%
+    ~/.claude/shared/reference.md     2,741  ██████████                  39%
+    skill descriptions (8)              517  ██                           7%
+    alpha-service/CLAUDE.md              80  █                            1%
+    10 more parts                       172  █                            2%
+
+    in the order it loads:
+    user memory ─► project memory ─► imports ─► rule files ─► descriptions
+    3,594          95                2,849      24            542
+
+  in beta-tool                                                ≈ 6,994 tokens
+  user files only                                             ≈ 6,947 tokens
+  Descriptions of agents are not counted.
+
+=== report, skills
+  √ Language ─ √ Scope ─ √ Scan ─ ► REPORT ║ · Changes ─ · Summary       4/6
+
+    Overview     Findings 18     Context   [ Skills 9 ]
+
+  SKILLS                 lines   under 500 │    notes
+  User skills · ~/.claude/skills (8)
+    long-skill             512   ██████████│▓   over the recommendation
+    no-description           7   █░░░░░░░░░│    no description
+    shared-skill             6   █░░░░░░░░░│    ≠ copy in alpha-service
+    unreachable-skill        8   █░░░░░░░░░│    can never be invoked
+    wordy-skill              6   █░░░░░░░░░│    description 1,783 / 1,536
+    wrong-name               6   █░░░░░░░░░│    name differs from folder
+    good-skill               8   █░░░░░░░░░│
+    vague-skill              6   █░░░░░░░░░│
+
+  /work/demo/projects/alpha-service (1)
+    shared-skill             6   █░░░░░░░░░│    ≠ copy in ~/.claude/skills
+
+  No skills in: beta-tool
+  Third-party skills (marked do not edit): 0
+
+=== how to continue
+  Report 1 · the state of your setup
+  file:///work/demo/home/.claude/health-check/state-20261001-131730.html
+
+  ── How to continue ───────────────────────────────────────────────────────
+  Stopped here. Nothing was changed.
+  The changes need Claude Code:
+
+    1  open a terminal in the folder of this tool:
+         /work/demo/tool
+       and start Claude Code there:
+         claude
+    2  inside Claude Code, type:
+         /claude-health resume 20261001-131730
+
+  The run folder waits in ~/.claude/health-check/run-20261001-131730.
+  If your files change before you resume, the wizard scans again first.
+
+=== how to continue, inside Claude Code
+  Report 1 · the state of your setup
+  file:///work/demo/home/.claude/health-check/state-20261001-131730.html
+
+  Started from inside Claude Code, so no question was asked. To go on, type:
+         /claude-health resume 20261001-131730
+
+=== nothing to change
+  Report 1 · the state of your setup
+  file:///work/demo/home/.claude/health-check/state-20261001-131730.html
+
+  √ Nothing to change. That is a good result.
+
+=== another home folder
+  Report 1 · the state of your setup
+  file:///work/demo/home/.claude/health-check/state-20261001-131730.html
+
+  This run checked another home folder (--home), so it ends at the report.
+  The wizard in Claude Code works on your own home folder.
+
+=== session: the changes, file by file
+  CHANGES, FILE BY FILE                                18 changes · 13 files
+  your user memory file, then your other user files, then each project
+   1  ~/.claude/CLAUDE.md                                  4  ■3 ●1
+   2  ~/.claude/shared/chain-4.md                          1  ■1
+   3  ~/.claude/skills/long-skill/SKILL.md                 1  ■1
+   4  ~/.claude/skills/no-description/SKILL.md             1  ■1
+   5  ~/.claude/skills/unreachable-skill/SKILL.md          1  ■1
+   6  ~/.claude/skills/wordy-skill/SKILL.md                1  ■1
+   7  ~/.claude/skills/wrong-name/SKILL.md                 1  ●1
+   8  ~/.claude/commands/deploy.md                         1  ●1
+   9  ~/.claude/agents/helper.md                           1  ●1
+  10  ~/.claude/settings.json                              2  ■1 ●1
+  11  ~/.claude/settings.local.json                        1  ▲1
+  12  alpha-service/CLAUDE.md                              2  ●2
+  13  alpha-service/.claude/skills/shared-skill/SKILL.md   1  ●1
+
+=== session: the header of file 1
+  ── File 1 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/CLAUDE.md                                                 memory
+  238 lines   ████████████████████│▓▓▓▓   119% of the recommended 200
+  4 changes: Move into a rule file · Delete the duplicate · Shorten ×2
+
+=== session: the header of file 2
+  ── File 2 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/shared/chain-4.md                                       imported
+  5 lines
+  1 change: Shorten
+
+=== session: the header of file 3
+  ── File 3 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/long-skill/SKILL.md                                 skill
+  512 lines   ████████████████████│▓      102% of the recommended 500
+  1 change: Shorten
+
+=== session: the header of file 4
+  ── File 4 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/no-description/SKILL.md                             skill
+  7 lines   █░░░░░░░░░░░░░░░░░░░│         1% of the recommended 500
+  1 change: Fix the front matter
+
+=== session: the header of file 5
+  ── File 5 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/unreachable-skill/SKILL.md                          skill
+  8 lines   █░░░░░░░░░░░░░░░░░░░│         2% of the recommended 500
+  1 change: Fix the front matter
+
+=== session: the header of file 6
+  ── File 6 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/wordy-skill/SKILL.md                                skill
+  6 lines   █░░░░░░░░░░░░░░░░░░░│         1% of the recommended 500
+  1 change: Fix the front matter
+
+=== session: the header of file 7
+  ── File 7 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/skills/wrong-name/SKILL.md                                 skill
+  6 lines   █░░░░░░░░░░░░░░░░░░░│         1% of the recommended 500
+  1 change: Fix the front matter
+
+=== session: the header of file 8
+  ── File 8 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/commands/deploy.md                                       command
+  3 lines
+  1 change: Fix the front matter
+
+=== session: the header of file 9
+  ── File 9 of 13 ──────────────────────────────────────────────────────────
+  ~/.claude/agents/helper.md                                           agent
+  5 lines
+  1 change: Fix the front matter
+
+=== session: the header of file 10
+  ── File 10 of 13 ─────────────────────────────────────────────────────────
+  ~/.claude/settings.json                                           settings
+  2 changes: Change settings ×2
+
+=== session: the header of file 11
+  ── File 11 of 13 ─────────────────────────────────────────────────────────
+  ~/.claude/settings.local.json                               local settings
+  1 change: Change settings
+
+=== session: the header of file 12
+  ── File 12 of 13 ─────────────────────────────────────────────────────────
+  alpha-service/CLAUDE.md                                             memory
+  12 lines   █░░░░░░░░░░░░░░░░░░░│         6% of the recommended 200
+  2 changes: Delete the duplicate · Move to the user file
+
+=== session: the header of file 13
+  ── File 13 of 13 ─────────────────────────────────────────────────────────
+  alpha-service/.claude/skills/shared-skill/SKILL.md                   skill
+  6 lines   █░░░░░░░░░░░░░░░░░░░│         1% of the recommended 500
+  1 change: Delete the duplicate

@@ -1,0 +1,690 @@
+=== flags
+          ┌┐
+  ──────┐ │└┐ ┌──────  claude-health check VERSION
+        └─┘ └─┘        A health check of your Claude Code setup.
+
+  Reads    your Claude Code setup, no source code · sends nothing anywhere
+
+  This program   1 language · 2 scope · 3 scan · 4 report          no tokens
+  Claude Code    5 changes, file by file · 6 summary        your Claude plan
+
+  WHAT IT CHANGES       only after your yes to that one change, backup first
+  · your memory files (CLAUDE.md, CLAUDE.local.md, rule files; user and
+    project): the exact lines shown on the card are removed, shortened or
+    moved
+  · your own skills, commands and agents: front matter fixed, or the file
+    shortened
+  · new files: a skill, a command, a rule file, a hook script, or a
+    CLAUDE.md where there is none
+  · settings: a hook or a permission rule is added, nothing is removed
+  · without asking: only its own folder, ~/.claude/health-check/ (run data,
+    backups, the two reports)
+
+  WHAT IT NEVER CHANGES
+  · source code, or anything outside your Claude Code setup
+  · anything you did not confirm: there is no "apply all"
+  · settings entries and hooks that are already there
+  · a file as a whole: none is deleted, none is overwritten
+  · third-party skills
+  · the MCP configuration files
+  · session history and auto memory
+  · git: it does not stage, commit or upload
+
+  √ Language ─ √ Scope ─ ► SCAN ─ · Report ║ · Changes ─ · Summary       3/6
+
+  √ Language  English
+  √ Scope     user files + 2 projects (alpha-service, beta-tool)
+
+  √ User files   21 files in ~/.claude
+  √ Projects     2 found · 9 files
+  √ Imports      7 followed · 1 not found · 1 too deep
+  √ Settings     4 files · 4 hooks · values masked, never printed N ms
+  √ Checks       29 checks · 18 findings · 15 candidates · 1 to review
+  √ Context tax  ≈ 7,104 tokens before your first word (in alpha-service)
+  √ Report 1     state-STAMP.html N ms
+
+  Done in N s. No tokens used, nothing changed, nothing sent anywhere.
+
+  √ Language ─ √ Scope ─ √ Scan ─ ► REPORT ║ · Changes ─ · Summary       4/6
+
+  [ Overview ]   Findings 18     Context     Skills 9
+
+  30 files · 2 projects      ▲ 1 high   ■ 9 medium   ● 8 low   ○ 1 to review
+
+  MEMORY FILES                      lines       under 200 lines │ over
+  ~/.claude/CLAUDE.md                 238   ████████████████████│▓▓▓▓   119%
+  alpha-service/CLAUDE.md              12   █░░░░░░░░░░░░░░░░░░░│         6%
+  beta-tool/CLAUDE.md                   6   █░░░░░░░░░░░░░░░░░░░│         3%
+  alpha-service/CLAUDE.local.md         3   █░░░░░░░░░░░░░░░░░░░│         2%
+  alpha-service/…/web/CLAUDE.md         3   █░░░░░░░░░░░░░░░░░░░│         2%
+
+  LOADED AT EVERY SESSION START     lines       under 400 lines │ over
+  in alpha-service                    459   ████████████████████│▓▓▓    115%
+  in beta-tool                        443   ████████████████████│▓▓     111%
+  user files only                     437   ████████████████████│▓▓     109%
+
+  200 lines per file is documented. 400 for the total is a default of this
+  tool.
+
+    Overview   [ Findings 18 ]   Context     Skills 9
+
+  ▲ HIGH 1
+    settings file is not valid JSON     ~/.claude/settings.local.json
+  ■ MEDIUM 9
+    too much loaded at session start    ~/.claude/CLAUDE.md
+    import that does not resolve        ~/.claude/CLAUDE.md:43
+    memory file too long                ~/.claude/CLAUDE.md:47
+    hook points at a missing file       ~/.claude/settings.json
+    import chain too deep               ~/.claude/shared/chain-4.md:5
+    … 4 more in the report
+  ● LOW 8
+    copies of a skill that differ       alpha-service/…/SKILL.md
+    instruction repeated across files   alpha-service/CLAUDE.md:8
+    same line in several projects       alpha-service/CLAUDE.md:9
+    … 5 more in the report
+  ○ TO REVIEW 1                           nothing to change, yours to decide
+    MCP server, no permission rule      alpha-service: tracker, search
+
+  Candidates found by words only: 15. Claude reads them next.
+
+    Overview     Findings 18   [ Context ]   Skills 9
+
+  CONTEXT TAX  what is loaded before your first word
+  Tokens are estimated as bytes / 4: a default of this tool, not a
+  documented number.
+
+  in alpha-service                                            ≈ 7,104 tokens
+    ~/.claude/CLAUDE.md               3,594  █████████████               51%
+    ~/.claude/shared/reference.md     2,741  ██████████                  39%
+    skill descriptions (8)              517  ██                           7%
+    alpha-service/CLAUDE.md              80  █                            1%
+    10 more parts                       172  █                            2%
+
+    in the order it loads:
+    user memory ─► project memory ─► imports ─► rule files ─► descriptions
+    3,594          95                2,849      24            542
+
+  in beta-tool                                                ≈ 6,994 tokens
+  user files only                                             ≈ 6,947 tokens
+  Descriptions of agents are not counted.
+
+    Overview     Findings 18     Context   [ Skills 9 ]
+
+  SKILLS                 lines   under 500 │    notes
+  User skills · ~/.claude/skills (8)
+    long-skill             512   ██████████│▓   over the recommendation
+    no-description           7   █░░░░░░░░░│    no description
+    shared-skill             6   █░░░░░░░░░│    ≠ copy in alpha-service
+    unreachable-skill        8   █░░░░░░░░░│    can never be invoked
+    wordy-skill              6   █░░░░░░░░░│    description 1,783 / 1,536
+    wrong-name               6   █░░░░░░░░░│    name differs from folder
+    good-skill               8   █░░░░░░░░░│
+    vague-skill              6   █░░░░░░░░░│
+
+  <root>/projects/alpha-service (1)
+    shared-skill             6   █░░░░░░░░░│    ≠ copy in ~/.claude/skills
+
+  No skills in: beta-tool
+  Third-party skills (marked do not edit): 0
+
+  Report 1 · the state of your setup
+  <root>/home/.claude/health-check/state-STAMP.html
+
+=== asked
+          ┌┐
+  ──────┐ │└┐ ┌──────  claude-health check VERSION
+        └─┘ └─┘        A health check of your Claude Code setup.
+
+  Reads    your Claude Code setup, no source code · sends nothing anywhere
+
+  This program   1 language · 2 scope · 3 scan · 4 report          no tokens
+  Claude Code    5 changes, file by file · 6 summary        your Claude plan
+
+  ► LANGUAGE ─ · Scope ─ · Scan ─ · Report ║ · Changes ─ · Summary       1/6
+
+  ? Language / Jazyk
+    1  English
+    2  Slovensky
+  Type 1-2 and press Enter [1]: 1
+
+  WHAT IT CHANGES       only after your yes to that one change, backup first
+  · your memory files (CLAUDE.md, CLAUDE.local.md, rule files; user and
+    project): the exact lines shown on the card are removed, shortened or
+    moved
+  · your own skills, commands and agents: front matter fixed, or the file
+    shortened
+  · new files: a skill, a command, a rule file, a hook script, or a
+    CLAUDE.md where there is none
+  · settings: a hook or a permission rule is added, nothing is removed
+  · without asking: only its own folder, ~/.claude/health-check/ (run data,
+    backups, the two reports)
+
+  WHAT IT NEVER CHANGES
+  · source code, or anything outside your Claude Code setup
+  · anything you did not confirm: there is no "apply all"
+  · settings entries and hooks that are already there
+  · a file as a whole: none is deleted, none is overwritten
+  · third-party skills
+  · the MCP configuration files
+  · session history and auto memory
+  · git: it does not stage, commit or upload
+
+  √ Language ─ ► SCOPE ─ · Scan ─ · Report ║ · Changes ─ · Summary       2/6
+
+  √ Language  English
+
+  ? Which projects should be checked along with your user files?
+    Your user files (~/.claude) are always checked.
+    1  Only my user files
+         everything in ~/.claude: memory, skills, commands, hooks, settings
+    2  Every project under my home folder
+         looks only for CLAUDE.md and .claude folders · may take a minute
+    3  Folders I name
+         one project, or a folder that holds projects
+  Type 1-3 and press Enter [1]: 3
+
+  ? Folder (an empty line ends the list)
+  › <root>/projects
+    √ projects found: 2 · alpha-service, beta-tool
+  › 
+
+  √ Language ─ √ Scope ─ ► SCAN ─ · Report ║ · Changes ─ · Summary       3/6
+
+  √ Language  English
+  √ Scope     user files + 2 projects (alpha-service, beta-tool)
+
+  √ User files   21 files in ~/.claude
+  √ Projects     2 found · 9 files
+  √ Imports      7 followed · 1 not found · 1 too deep
+  √ Settings     4 files · 4 hooks · values masked, never printed N ms
+  √ Checks       29 checks · 18 findings · 15 candidates · 1 to review
+  √ Context tax  ≈ 7,104 tokens before your first word (in alpha-service)
+  √ Report 1     state-STAMP.html N ms
+
+  Done in N s. No tokens used, nothing changed, nothing sent anywhere.
+
+  √ Language ─ √ Scope ─ √ Scan ─ ► REPORT ║ · Changes ─ · Summary       4/6
+
+  [ Overview ]   Findings 18     Context     Skills 9
+
+  30 files · 2 projects      ▲ 1 high   ■ 9 medium   ● 8 low   ○ 1 to review
+
+  MEMORY FILES                      lines       under 200 lines │ over
+  ~/.claude/CLAUDE.md                 238   ████████████████████│▓▓▓▓   119%
+  alpha-service/CLAUDE.md              12   █░░░░░░░░░░░░░░░░░░░│         6%
+  beta-tool/CLAUDE.md                   6   █░░░░░░░░░░░░░░░░░░░│         3%
+  alpha-service/CLAUDE.local.md         3   █░░░░░░░░░░░░░░░░░░░│         2%
+  alpha-service/…/web/CLAUDE.md         3   █░░░░░░░░░░░░░░░░░░░│         2%
+
+  LOADED AT EVERY SESSION START     lines       under 400 lines │ over
+  in alpha-service                    459   ████████████████████│▓▓▓    115%
+  in beta-tool                        443   ████████████████████│▓▓     111%
+  user files only                     437   ████████████████████│▓▓     109%
+
+  200 lines per file is documented. 400 for the total is a default of this
+  tool.
+
+    Overview   [ Findings 18 ]   Context     Skills 9
+
+  ▲ HIGH 1
+    settings file is not valid JSON     ~/.claude/settings.local.json
+  ■ MEDIUM 9
+    too much loaded at session start    ~/.claude/CLAUDE.md
+    import that does not resolve        ~/.claude/CLAUDE.md:43
+    memory file too long                ~/.claude/CLAUDE.md:47
+    hook points at a missing file       ~/.claude/settings.json
+    import chain too deep               ~/.claude/shared/chain-4.md:5
+    … 4 more in the report
+  ● LOW 8
+    copies of a skill that differ       alpha-service/…/SKILL.md
+    instruction repeated across files   alpha-service/CLAUDE.md:8
+    same line in several projects       alpha-service/CLAUDE.md:9
+    … 5 more in the report
+  ○ TO REVIEW 1                           nothing to change, yours to decide
+    MCP server, no permission rule      alpha-service: tracker, search
+
+  Candidates found by words only: 15. Claude reads them next.
+
+    Overview     Findings 18   [ Context ]   Skills 9
+
+  CONTEXT TAX  what is loaded before your first word
+  Tokens are estimated as bytes / 4: a default of this tool, not a
+  documented number.
+
+  in alpha-service                                            ≈ 7,104 tokens
+    ~/.claude/CLAUDE.md               3,594  █████████████               51%
+    ~/.claude/shared/reference.md     2,741  ██████████                  39%
+    skill descriptions (8)              517  ██                           7%
+    alpha-service/CLAUDE.md              80  █                            1%
+    10 more parts                       172  █                            2%
+
+    in the order it loads:
+    user memory ─► project memory ─► imports ─► rule files ─► descriptions
+    3,594          95                2,849      24            542
+
+  in beta-tool                                                ≈ 6,994 tokens
+  user files only                                             ≈ 6,947 tokens
+  Descriptions of agents are not counted.
+
+    Overview     Findings 18     Context   [ Skills 9 ]
+
+  SKILLS                 lines   under 500 │    notes
+  User skills · ~/.claude/skills (8)
+    long-skill             512   ██████████│▓   over the recommendation
+    no-description           7   █░░░░░░░░░│    no description
+    shared-skill             6   █░░░░░░░░░│    ≠ copy in alpha-service
+    unreachable-skill        8   █░░░░░░░░░│    can never be invoked
+    wordy-skill              6   █░░░░░░░░░│    description 1,783 / 1,536
+    wrong-name               6   █░░░░░░░░░│    name differs from folder
+    good-skill               8   █░░░░░░░░░│
+    vague-skill              6   █░░░░░░░░░│
+
+  <root>/projects/alpha-service (1)
+    shared-skill             6   █░░░░░░░░░│    ≠ copy in ~/.claude/skills
+
+  No skills in: beta-tool
+  Third-party skills (marked do not edit): 0
+
+  Report 1 · the state of your setup
+  <root>/home/.claude/health-check/state-STAMP.html
+
+=== terminal
+␛[36m          ┌┐␛[0m
+␛[36m  ──────┐ │└┐ ┌──────␛[0m  ␛[1mclaude-health check␛[0m ␛[2mVERSION␛[0m
+␛[36m        └─┘ └─┘␛[0m        A health check of your Claude Code setup.
+
+  ␛[1mReads␛[0m    your Claude Code setup, no source code · sends nothing anywhere
+
+  ␛[1mThis program␛[0m   1 language · 2 scope · 3 scan · 4 report          ␛[2mno tokens␛[0m
+  ␛[1mClaude Code␛[0m    5 changes, file by file · 6 summary        ␛[2myour Claude plan␛[0m
+
+  ␛[1mWHAT IT CHANGES␛[0m       ␛[2monly after your yes to that one change, backup first␛[0m
+  ␛[2m·␛[0m your memory files (CLAUDE.md, CLAUDE.local.md, rule files; user and
+    project): the exact lines shown on the card are removed, shortened or
+    moved
+  ␛[2m·␛[0m your own skills, commands and agents: front matter fixed, or the file
+    shortened
+  ␛[2m·␛[0m new files: a skill, a command, a rule file, a hook script, or a
+    CLAUDE.md where there is none
+  ␛[2m·␛[0m settings: a hook or a permission rule is added, nothing is removed
+  ␛[2m·␛[0m without asking: only its own folder, ~/.claude/health-check/ (run data,
+    backups, the two reports)
+
+  ␛[1mWHAT IT NEVER CHANGES␛[0m
+  ␛[2m·␛[0m source code, or anything outside your Claude Code setup
+  ␛[2m·␛[0m anything you did not confirm: there is no "apply all"
+  ␛[2m·␛[0m settings entries and hooks that are already there
+  ␛[2m·␛[0m a file as a whole: none is deleted, none is overwritten
+  ␛[2m·␛[0m third-party skills
+  ␛[2m·␛[0m the MCP configuration files
+  ␛[2m·␛[0m session history and auto memory
+  ␛[2m·␛[0m git: it does not stage, commit or upload
+
+  Press Enter to continue: 
+  ␛[32m√␛[0m Language␛[2m ─ ␛[0m␛[1;36m► SCOPE␛[0m␛[2m ─ ␛[0m␛[2m· Scan␛[0m␛[2m ─ ␛[0m␛[2m· Report␛[0m␛[2m ║ ␛[0m␛[2m· Changes␛[0m␛[2m ─ ␛[0m␛[2m· Summary␛[0m       ␛[2m2/6␛[0m
+
+  ␛[32m√␛[0m Language  English
+
+  ? Which projects should be checked along with your user files?
+    Your user files (~/.claude) are always checked.
+    1  Only my user files
+         everything in ~/.claude: memory, skills, commands, hooks, settings
+    2  Every project under my home folder
+         looks only for CLAUDE.md and .claude folders · may take a minute
+    3  Folders I name
+         one project, or a folder that holds projects
+  Type 1-3 and press Enter [1]: 
+  ␛[32m√␛[0m Language␛[2m ─ ␛[0m␛[32m√␛[0m Scope␛[2m ─ ␛[0m␛[1;36m► SCAN␛[0m␛[2m ─ ␛[0m␛[2m· Report␛[0m␛[2m ║ ␛[0m␛[2m· Changes␛[0m␛[2m ─ ␛[0m␛[2m· Summary␛[0m       ␛[2m3/6␛[0m
+
+  ␛[32m√␛[0m Language  English
+  ␛[32m√␛[0m Scope     user files only
+
+  ␛[32m√␛[0m User files   21 files in ~/.claude
+  ␛[32m√␛[0m Projects     0 found · 0 files
+  ␛[32m√␛[0m Imports      6 followed · 1 not found · 1 too deep
+  ␛[32m√␛[0m Settings     2 files · 3 hooks · values masked, never printed ␛[2mN ms␛[0m
+  ␛[32m√␛[0m Checks       29 checks · 15 findings · 11 candidates · 0 to review
+  ␛[32m√␛[0m Context tax  ≈ 6,947 tokens before your first word (user files only)
+  ␛[32m√␛[0m Report 1     state-STAMP.html ␛[2mN ms␛[0m
+
+  Done in N s. No tokens used, nothing changed, nothing sent anywhere.
+
+  ␛[32m√␛[0m Language␛[2m ─ ␛[0m␛[32m√␛[0m Scope␛[2m ─ ␛[0m␛[32m√␛[0m Scan␛[2m ─ ␛[0m␛[1;36m► REPORT␛[0m␛[2m ║ ␛[0m␛[2m· Changes␛[0m␛[2m ─ ␛[0m␛[2m· Summary␛[0m       ␛[2m4/6␛[0m
+
+  ␛[7m[ Overview ]␛[0m   ␛[2mFindings 15␛[0m     ␛[2mContext␛[0m     ␛[2mSkills 8␛[0m
+
+  21 files · 0 projects      ␛[31m▲␛[0m 1 high   ␛[33m■␛[0m 9 medium   ␛[36m●␛[0m 5 low   ␛[2m○␛[0m 0 to review
+
+  ␛[1mMEMORY FILES␛[0m                      ␛[2mlines␛[0m       ␛[2munder 200 lines␛[0m ␛[2m│␛[0m ␛[2mover␛[0m
+  ~/.claude/CLAUDE.md                 238   ␛[31m████████████████████␛[0m␛[2m│␛[0m␛[31m▓▓▓▓␛[0m  ␛[31m 119%␛[0m
+
+  ␛[1mLOADED AT EVERY SESSION START␛[0m     ␛[2mlines␛[0m       ␛[2munder 400 lines␛[0m ␛[2m│␛[0m ␛[2mover␛[0m
+  user files only                     437   ␛[31m████████████████████␛[0m␛[2m│␛[0m␛[31m▓▓␛[0m    ␛[31m 109%␛[0m
+
+  ␛[2m200 lines per file is documented. 400 for the total is a default of this␛[0m
+  ␛[2mtool.␛[0m
+
+    ␛[2mOverview␛[0m   ␛[7m[ Findings 15 ]␛[0m   ␛[2mContext␛[0m     ␛[2mSkills 8␛[0m
+
+  ␛[31m▲ HIGH 1␛[0m
+    settings file is not valid JSON     ␛[2m~/.claude/settings.local.json␛[0m
+  ␛[33m■ MEDIUM 9␛[0m
+    too much loaded at session start    ␛[2m~/.claude/CLAUDE.md␛[0m
+    import that does not resolve        ␛[2m~/.claude/CLAUDE.md:43␛[0m
+    memory file too long                ␛[2m~/.claude/CLAUDE.md:47␛[0m
+    hook points at a missing file       ␛[2m~/.claude/settings.json␛[0m
+    import chain too deep               ␛[2m~/.claude/shared/chain-4.md:5␛[0m
+    skill too long                      ␛[2m~/.claude/skills/long-skill/SKILL.md␛[0m
+    skill without a description         ␛[2m~/…/skills/no-description/SKILL.md␛[0m
+    ␛[2m… 2 more in the report␛[0m
+  ␛[36m● LOW 5␛[0m
+    instruction repeated in one file    ␛[2m~/.claude/CLAUDE.md:10␛[0m
+    agent without a description         ␛[2m~/.claude/agents/helper.md␛[0m
+    command without a description       ␛[2m~/.claude/commands/deploy.md␛[0m
+    ␛[2m… 2 more in the report␛[0m
+
+  Candidates found by words only: 11. Claude reads them next.
+
+    ␛[2mOverview␛[0m     ␛[2mFindings 15␛[0m   ␛[7m[ Context ]␛[0m   ␛[2mSkills 8␛[0m
+
+  ␛[1mCONTEXT TAX␛[0m  what is loaded before your first word
+  ␛[2mTokens are estimated as bytes / 4: a default of this tool, not a␛[0m
+  ␛[2mdocumented number.␛[0m
+
+  ␛[1muser files only␛[0m                                             ␛[1m≈ 6,947 tokens␛[0m
+    ~/.claude/CLAUDE.md               3,594  ␛[36m█████████████␛[0m               52%
+    ~/.claude/shared/reference.md     2,741  ␛[36m██████████␛[0m                  39%
+    skill descriptions (7)              494  ␛[36m██␛[0m                           7%
+    ~/.claude/shared/git.md              29  ␛[36m█␛[0m                            0%
+    6 more parts                         89  ␛[36m█␛[0m                            1%
+
+    ␛[2min the order it loads:␛[0m
+    user memory␛[2m ─► ␛[0mimports␛[2m ─► ␛[0mrule files␛[2m ─► ␛[0mdescriptions
+    ␛[36m3,594␛[0m          ␛[36m2,830␛[0m      ␛[36m14␛[0m            ␛[36m509␛[0m
+  ␛[2mDescriptions of agents are not counted.␛[0m
+
+    ␛[2mOverview␛[0m     ␛[2mFindings 15␛[0m     ␛[2mContext␛[0m   ␛[7m[ Skills 8 ]␛[0m
+
+  ␛[1mSKILLS␛[0m                 ␛[2mlines␛[0m   ␛[2munder 500 │␛[0m    ␛[2mnotes␛[0m
+  ␛[1mUser skills · ~/.claude/skills (8)␛[0m
+    long-skill             512   ␛[31m██████████␛[0m␛[2m│␛[0m␛[31m▓␛[0m   ␛[31mover the recommendation␛[0m
+    no-description           7   ␛[36m█␛[0m␛[2m░░░░░░░░░␛[0m␛[2m│␛[0m    no description
+    unreachable-skill        8   ␛[36m█␛[0m␛[2m░░░░░░░░░␛[0m␛[2m│␛[0m    can never be invoked
+    wordy-skill              6   ␛[36m█␛[0m␛[2m░░░░░░░░░␛[0m␛[2m│␛[0m    description 1,783 / 1,536
+    wrong-name               6   ␛[36m█␛[0m␛[2m░░░░░░░░░␛[0m␛[2m│␛[0m    name differs from folder
+    good-skill               8   ␛[36m█␛[0m␛[2m░░░░░░░░░␛[0m␛[2m│␛[0m
+    shared-skill             6   ␛[36m█␛[0m␛[2m░░░░░░░░░␛[0m␛[2m│␛[0m
+    vague-skill              6   ␛[36m█␛[0m␛[2m░░░░░░░░░␛[0m␛[2m│␛[0m
+
+  ␛[2mThird-party skills (marked do not edit): 0␛[0m
+
+  ␛[1mReport 1 · the state of your setup␛[0m
+  ␛[36m<root>/home/.claude/health-check/state-STAMP.html␛[0m
+
+=== home folder
+          ┌┐
+  ──────┐ │└┐ ┌──────  claude-health check VERSION
+        └─┘ └─┘        A health check of your Claude Code setup.
+
+  Reads    your Claude Code setup, no source code · sends nothing anywhere
+
+  This program   1 language · 2 scope · 3 scan · 4 report          no tokens
+  Claude Code    5 changes, file by file · 6 summary        your Claude plan
+
+  WHAT IT CHANGES       only after your yes to that one change, backup first
+  · your memory files (CLAUDE.md, CLAUDE.local.md, rule files; user and
+    project): the exact lines shown on the card are removed, shortened or
+    moved
+  · your own skills, commands and agents: front matter fixed, or the file
+    shortened
+  · new files: a skill, a command, a rule file, a hook script, or a
+    CLAUDE.md where there is none
+  · settings: a hook or a permission rule is added, nothing is removed
+  · without asking: only its own folder, ~/.claude/health-check/ (run data,
+    backups, the two reports)
+
+  WHAT IT NEVER CHANGES
+  · source code, or anything outside your Claude Code setup
+  · anything you did not confirm: there is no "apply all"
+  · settings entries and hooks that are already there
+  · a file as a whole: none is deleted, none is overwritten
+  · third-party skills
+  · the MCP configuration files
+  · session history and auto memory
+  · git: it does not stage, commit or upload
+
+  √ Language ─ ► SCOPE ─ · Scan ─ · Report ║ · Changes ─ · Summary       2/6
+
+  √ Language  English
+
+  ? Which projects should be checked along with your user files?
+    Your user files (~/.claude) are always checked.
+    1  Only my user files
+         everything in ~/.claude: memory, skills, commands, hooks, settings
+    2  Every project under my home folder
+         looks only for CLAUDE.md and .claude folders · may take a minute
+    3  Folders I name
+         one project, or a folder that holds projects
+  Type 1-3 and press Enter [1]: 2
+
+    · The search covers your home folder, not the whole machine.
+    · It looks only for CLAUDE.md files and .claude folders and opens
+      nothing else.
+    · It skips hidden, dependency, cache and system folders, and stops at
+      20,000 folders or 6 levels.
+    · It may take a minute.
+  ? A project outside your home folder? Name it (an empty line when there is
+    none)
+  › 
+
+  √ Language ─ √ Scope ─ ► SCAN ─ · Report ║ · Changes ─ · Summary       3/6
+
+  √ Language  English
+  √ Scope     user files + every project under the home folder (2)
+
+  √ User files   21 files in ~/.claude
+  √ Projects     2 found · 1 file
+  √ Imports      6 followed · 1 not found · 1 too deep
+  √ Settings     3 files · 3 hooks · values masked, never printed N ms
+  √ Checks       29 checks · 15 findings · 11 candidates · 0 to review
+  √ Context tax  ≈ 6,959 tokens before your first word (in gamma-app)
+  √ Report 1     state-STAMP.html N ms
+
+  Done in N s. No tokens used, nothing changed, nothing sent anywhere.
+
+  √ Language ─ √ Scope ─ √ Scan ─ ► REPORT ║ · Changes ─ · Summary       4/6
+
+  [ Overview ]   Findings 15     Context     Skills 8
+
+  22 files · 2 projects      ▲ 1 high   ■ 9 medium   ● 5 low   ○ 0 to review
+
+  MEMORY FILES                      lines       under 200 lines │ over
+  ~/.claude/CLAUDE.md                 238   ████████████████████│▓▓▓▓   119%
+  gamma-app/CLAUDE.md                   3   █░░░░░░░░░░░░░░░░░░░│         2%
+
+  LOADED AT EVERY SESSION START     lines       under 400 lines │ over
+  in gamma-app                        440   ████████████████████│▓▓     110%
+  user files only                     437   ████████████████████│▓▓     109%
+  in delta-lib                        437   ████████████████████│▓▓     109%
+
+  200 lines per file is documented. 400 for the total is a default of this
+  tool.
+
+    Overview   [ Findings 15 ]   Context     Skills 8
+
+  ▲ HIGH 1
+    settings file is not valid JSON     ~/.claude/settings.local.json
+  ■ MEDIUM 9
+    too much loaded at session start    ~/.claude/CLAUDE.md
+    import that does not resolve        ~/.claude/CLAUDE.md:43
+    memory file too long                ~/.claude/CLAUDE.md:47
+    hook points at a missing file       ~/.claude/settings.json
+    import chain too deep               ~/.claude/shared/chain-4.md:5
+    skill too long                      ~/.claude/skills/long-skill/SKILL.md
+    skill without a description         ~/…/skills/no-description/SKILL.md
+    … 2 more in the report
+  ● LOW 5
+    instruction repeated in one file    ~/.claude/CLAUDE.md:10
+    agent without a description         ~/.claude/agents/helper.md
+    command without a description       ~/.claude/commands/deploy.md
+    … 2 more in the report
+
+  Candidates found by words only: 11. Claude reads them next.
+
+    Overview     Findings 15   [ Context ]   Skills 8
+
+  CONTEXT TAX  what is loaded before your first word
+  Tokens are estimated as bytes / 4: a default of this tool, not a
+  documented number.
+
+  in gamma-app                                                ≈ 6,959 tokens
+    ~/.claude/CLAUDE.md               3,594  █████████████               52%
+    ~/.claude/shared/reference.md     2,741  ██████████                  39%
+    skill descriptions (7)              494  ██                           7%
+    ~/.claude/shared/git.md              29  █                            0%
+    7 more parts                        101  █                            1%
+
+    in the order it loads:
+    user memory ─► project memory ─► imports ─► rule files ─► descriptions
+    3,594          12                2,830      14            509
+
+  user files only                                             ≈ 6,947 tokens
+  in delta-lib                                                ≈ 6,947 tokens
+  Descriptions of agents are not counted.
+
+    Overview     Findings 15     Context   [ Skills 8 ]
+
+  SKILLS                 lines   under 500 │    notes
+  User skills · ~/.claude/skills (8)
+    long-skill             512   ██████████│▓   over the recommendation
+    no-description           7   █░░░░░░░░░│    no description
+    unreachable-skill        8   █░░░░░░░░░│    can never be invoked
+    wordy-skill              6   █░░░░░░░░░│    description 1,783 / 1,536
+    wrong-name               6   █░░░░░░░░░│    name differs from folder
+    good-skill               8   █░░░░░░░░░│
+    shared-skill             6   █░░░░░░░░░│
+    vague-skill              6   █░░░░░░░░░│
+
+  No skills in: delta-lib, gamma-app
+  Third-party skills (marked do not edit): 0
+
+  Report 1 · the state of your setup
+  <root>/home/.claude/health-check/state-STAMP.html
+
+=== ascii
+  ------\  /\  /------  claude-health check VERSION
+         \/  \/         A health check of your Claude Code setup.
+
+  Reads    your Claude Code setup, no source code - sends nothing anywhere
+
+  This program   1 language - 2 scope - 3 scan - 4 report          no tokens
+  Claude Code    5 changes, file by file - 6 summary        your Claude plan
+
+  WHAT IT CHANGES       only after your yes to that one change, backup first
+  - your memory files (CLAUDE.md, CLAUDE.local.md, rule files; user and
+    project): the exact lines shown on the card are removed, shortened or
+    moved
+  - your own skills, commands and agents: front matter fixed, or the file
+    shortened
+  - new files: a skill, a command, a rule file, a hook script, or a
+    CLAUDE.md where there is none
+  - settings: a hook or a permission rule is added, nothing is removed
+  - without asking: only its own folder, ~/.claude/health-check/ (run data,
+    backups, the two reports)
+
+  WHAT IT NEVER CHANGES
+  - source code, or anything outside your Claude Code setup
+  - anything you did not confirm: there is no "apply all"
+  - settings entries and hooks that are already there
+  - a file as a whole: none is deleted, none is overwritten
+  - third-party skills
+  - the MCP configuration files
+  - session history and auto memory
+  - git: it does not stage, commit or upload
+
+  + Language - + Scope - > SCAN - . Report | . Changes - . Summary       3/6
+
+  + Language  English
+  + Scope     user files only
+
+  + User files   21 files in ~/.claude
+  + Projects     0 found - 0 files
+  + Imports      6 followed - 1 not found - 1 too deep
+  + Settings     2 files - 3 hooks - values masked, never printed N ms
+  + Checks       29 checks - 15 findings - 11 candidates - 0 to review
+  + Context tax  ~ 6,947 tokens before your first word (user files only)
+  + Report 1     state-STAMP.html N ms
+
+  Done in N s. No tokens used, nothing changed, nothing sent anywhere.
+
+  + Language - + Scope - + Scan - > REPORT | . Changes - . Summary       4/6
+
+  [ Overview ]   Findings 15     Context     Skills 8
+
+  21 files - 0 projects      ! 1 high   * 9 medium   o 5 low   ? 0 to review
+
+  MEMORY FILES                      lines       under 200 lines | over
+  ~/.claude/CLAUDE.md                 238   ####################|!!!!   119%
+
+  LOADED AT EVERY SESSION START     lines       under 400 lines | over
+  user files only                     437   ####################|!!     109%
+
+  200 lines per file is documented. 400 for the total is a default of this
+  tool.
+
+    Overview   [ Findings 15 ]   Context     Skills 8
+
+  ! HIGH 1
+    settings file is not valid JSON     ~/.claude/settings.local.json
+  * MEDIUM 9
+    too much loaded at session start    ~/.claude/CLAUDE.md
+    import that does not resolve        ~/.claude/CLAUDE.md:43
+    memory file too long                ~/.claude/CLAUDE.md:47
+    hook points at a missing file       ~/.claude/settings.json
+    import chain too deep               ~/.claude/shared/chain-4.md:5
+    skill too long                      ~/.claude/skills/long-skill/SKILL.md
+    skill without a description         ~/.../skills/no-description/SKILL.md
+    ... 2 more in the report
+  o LOW 5
+    instruction repeated in one file    ~/.claude/CLAUDE.md:10
+    agent without a description         ~/.claude/agents/helper.md
+    command without a description       ~/.claude/commands/deploy.md
+    ... 2 more in the report
+
+  Candidates found by words only: 11. Claude reads them next.
+
+    Overview     Findings 15   [ Context ]   Skills 8
+
+  CONTEXT TAX  what is loaded before your first word
+  Tokens are estimated as bytes / 4: a default of this tool, not a
+  documented number.
+
+  user files only                                             ~ 6,947 tokens
+    ~/.claude/CLAUDE.md               3,594  #############               52%
+    ~/.claude/shared/reference.md     2,741  ##########                  39%
+    skill descriptions (7)              494  ##                           7%
+    ~/.claude/shared/git.md              29  #                            0%
+    6 more parts                         89  #                            1%
+
+    in the order it loads:
+    user memory -> imports -> rule files -> descriptions
+    3,594          2,830      14            509
+  Descriptions of agents are not counted.
+
+    Overview     Findings 15     Context   [ Skills 8 ]
+
+  SKILLS                 lines   under 500 |    notes
+  User skills - ~/.claude/skills (8)
+    long-skill             512   ##########|!   over the recommendation
+    no-description           7   #.........|    no description
+    unreachable-skill        8   #.........|    can never be invoked
+    wordy-skill              6   #.........|    description 1,783 / 1,536
+    wrong-name               6   #.........|    name differs from folder
+    good-skill               8   #.........|
+    shared-skill             6   #.........|
+    vague-skill              6   #.........|
+
+  Third-party skills (marked do not edit): 0
+
+  Report 1 - the state of your setup
+  <root>/home/.claude/health-check/state-STAMP.html

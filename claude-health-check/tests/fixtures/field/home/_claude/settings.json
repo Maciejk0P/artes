@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": ["Bash(npm run *)", "mcp__notes"],
+    "deny": ["Read(./.env)"]
+  },
+  "hooks": {
+    "TaskCompleted": [
+      {
+        "hooks": [{ "type": "command", "command": "bash ~/.claude/hooks/notify.sh" }]
+      }
+    ],
+    "WorktreeCreate": [
+      {
+        "hooks": [{ "type": "command", "command": "bash ~/.claude/hooks/notify.sh" }]
+      }
+    ],
+    "BeforeLunch": [
+      {
+        "hooks": [{ "type": "command", "command": "bash ~/.claude/hooks/notify.sh" }]
+      }
+    ]
+  }
+}
